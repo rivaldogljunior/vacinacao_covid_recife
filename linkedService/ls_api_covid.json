@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "http://dados.recife.pe.gov.br/dataset/especies-de-aves-presentes-no-recife/resource/",
+			"url": "http://dados.recife.pe.gov.br/dataset/especies-de-aves-presentes-no-recife/resource/536a9a9f-7860-40db-9931-0b9374d174bf",
 			"enableServerCertificateValidation": false,
 			"authenticationType": "Anonymous"
 		}
