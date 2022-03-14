@@ -45,32 +45,13 @@
 				"outputs": [
 					{
 						"referenceName": "ds_json_generic",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"containerName": "raw",
+							"fileName": "jsonVacinacao.json"
+						}
 					}
 				]
-			},
-			{
-				"name": "RAW_TO_TRUSTED",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "API_TO_RAW_DLS",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"enableStaging": false
-				}
 			},
 			{
 				"name": "TRUSTED_TO_BD",
@@ -116,6 +97,33 @@
 				"userProperties": [],
 				"typeProperties": {
 					"enableStaging": false
+				}
+			},
+			{
+				"name": "RAW_TO_TRUSTED",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "API_TO_RAW_DLS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],

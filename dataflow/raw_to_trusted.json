@@ -1,0 +1,28 @@
+{
+	"name": "raw_to_trusted",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_json_generic",
+						"type": "DatasetReference"
+					},
+					"name": "sourceJson"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false,",
+				"     purgeFiles: true,",
+				"     documentForm: 'documentPerLine',",
+				"     wildcardPaths:['*.json*']) ~> sourceJson"
+			]
+		}
+	}
+}
