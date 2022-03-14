@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "JsonSource",
 						"storeSettings": {
 							"type": "HttpReadSettings",
 							"requestMethod": "GET"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "JsonReadSettings"
 						}
 					},
 					"sink": {
@@ -38,7 +38,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_api_csv",
+						"referenceName": "ds_api_json",
 						"type": "DatasetReference"
 					}
 				],
