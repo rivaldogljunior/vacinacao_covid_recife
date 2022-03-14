@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "http://dados.recife.pe.gov.br/dataset/especies-de-aves-presentes-no-recife/resource/536a9a9f-7860-40db-9931-0b9374d174bf",
+			"url": "http://dados.recife.pe.gov.br/dataset/7ccb3816-0d62-49e1-b39a-3159870883b0/resource/bceb5759-5500-49db-bc86-b038892acc06/download/vacinados.csv",
 			"enableServerCertificateValidation": false,
 			"authenticationType": "Anonymous"
 		}
