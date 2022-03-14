@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "JsonSource",
+						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "HttpReadSettings",
 							"requestMethod": "GET"
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings"
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -38,7 +38,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_api_json",
+						"referenceName": "ds_api_csv",
 						"type": "DatasetReference"
 					}
 				],
@@ -52,72 +52,6 @@
 						}
 					}
 				]
-			},
-			{
-				"name": "TRUSTED_TO_BD",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "RAW_TO_TRUSTED",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"enableStaging": false
-				}
-			},
-			{
-				"name": "Copy data4",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "TRUSTED_TO_BD",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"enableStaging": false
-				}
-			},
-			{
-				"name": "RAW_TO_TRUSTED",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
 			}
 		],
 		"annotations": []

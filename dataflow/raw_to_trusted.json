@@ -9,19 +9,18 @@
 						"referenceName": "ds_json_generic",
 						"type": "DatasetReference"
 					},
-					"name": "sourceJson"
+					"name": "sourceCsv"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(allowSchemaDrift: false,",
 				"     validateSchema: false,",
-				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false,",
 				"     purgeFiles: true,",
 				"     documentForm: 'documentPerLine',",
-				"     wildcardPaths:['*.json*']) ~> sourceJson"
+				"     wildcardPaths:['*.json*']) ~> sourceCsv"
 			]
 		}
 	}
