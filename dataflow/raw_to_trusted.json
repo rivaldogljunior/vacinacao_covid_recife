@@ -9,7 +9,7 @@
 						"referenceName": "ds_json_generic",
 						"type": "DatasetReference"
 					},
-					"name": "sourceCsv"
+					"name": "sourceJson"
 				}
 			],
 			"sinks": [],
@@ -20,7 +20,7 @@
 				"     ignoreNoFilesFound: false,",
 				"     purgeFiles: true,",
 				"     documentForm: 'documentPerLine',",
-				"     wildcardPaths:['*.json*']) ~> sourceCsv"
+				"     wildcardPaths:['*.json*']) ~> sourceJson"
 			]
 		}
 	}
