@@ -102,14 +102,7 @@
 			{
 				"name": "RAW_TO_TRUSTED",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "API_TO_RAW_DLS",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
