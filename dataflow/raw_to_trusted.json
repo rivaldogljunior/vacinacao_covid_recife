@@ -13,13 +13,49 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "normalizandoCamposJson"
+				}
+			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          Prop_0 as string,",
+				"          Prop_1 as string,",
+				"          Prop_10 as string,",
+				"          Prop_11 as string,",
+				"          Prop_12 as string,",
+				"          Prop_2 as string,",
+				"          Prop_3 as string,",
+				"          Prop_4 as string,",
+				"          Prop_5 as string,",
+				"          Prop_6 as string,",
+				"          Prop_7 as string,",
+				"          Prop_8 as string,",
+				"          Prop_9 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'documentPerLine',",
-				"     wildcardPaths:['*.json*']) ~> sourceJson"
+				"     wildcardPaths:['*.json*']) ~> sourceJson",
+				"sourceJson foldDown(unroll(),",
+				"     mapColumn(",
+				"          faixa_etaria = Prop_0,",
+				"          CNES = Prop_10,",
+				"          sistema_origem = Prop_11,",
+				"          data_vacinacao = Prop_12,",
+				"          genero = Prop_2,",
+				"          raca_cor = Prop_3,",
+				"          municipio = Prop_4,",
+				"          grupo = Prop_5,",
+				"          categoria = Prop_6,",
+				"          vacina_fabricante = Prop_8,",
+				"          ordem_vacina = Prop_9",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> normalizandoCamposJson"
 			]
 		}
 	}
