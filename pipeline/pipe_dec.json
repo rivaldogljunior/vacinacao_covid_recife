@@ -43,16 +43,6 @@
 						"referenceName": "ds_api_csv",
 						"type": "DatasetReference"
 					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_csv_generic",
-						"type": "DatasetReference",
-						"parameters": {
-							"containerName": "raw",
-							"fileName": "csvVacinacao.csv"
-						}
-					}
 				]
 			}
 		],
