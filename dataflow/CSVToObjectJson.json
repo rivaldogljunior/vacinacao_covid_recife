@@ -12,7 +12,15 @@
 					"name": "sourceJson"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_json_output",
+						"type": "DatasetReference"
+					},
+					"name": "sinkJson"
+				}
+			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
@@ -20,7 +28,13 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> sourceJson"
+				"     ignoreNoFilesFound: false) ~> sourceJson",
+				"sourceJson sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['jsonVacinados.json'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkJson"
 			]
 		}
 	}
