@@ -5,22 +5,14 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "ds_raw_json",
-						"type": "DatasetReference"
-					},
 					"name": "sourceJson"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(output(",
-				"          Column_1 as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> sourceJson"
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> sourceJson"
 			]
 		}
 	}
