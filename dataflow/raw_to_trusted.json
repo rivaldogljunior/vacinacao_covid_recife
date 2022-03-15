@@ -5,26 +5,19 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "ds_json_generic",
-						"type": "DatasetReference"
-					},
-					"name": "sourceJson"
+					"name": "sourceCsv"
 				}
 			],
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "normalizandoCamposJson"
+					"name": "normalizandoCamposCsv"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
 				"          Prop_0 as string,",
 				"          Prop_1 as string,",
-				"          Prop_10 as string,",
-				"          Prop_11 as string,",
-				"          Prop_12 as string,",
 				"          Prop_2 as string,",
 				"          Prop_3 as string,",
 				"          Prop_4 as string,",
@@ -32,15 +25,16 @@
 				"          Prop_6 as string,",
 				"          Prop_7 as string,",
 				"          Prop_8 as string,",
-				"          Prop_9 as string",
+				"          Prop_9 as string,",
+				"          Prop_10 as string,",
+				"          Prop_11 as string,",
+				"          Prop_12 as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine',",
-				"     wildcardPaths:['*.json*']) ~> sourceJson",
-				"sourceJson foldDown(unroll(),",
+				"     wildcardPaths:['*.csv*']) ~> sourceCsv",
+				"sourceCsv foldDown(unroll(),",
 				"     mapColumn(",
 				"          faixa_etaria = Prop_0,",
 				"          CNES = Prop_10,",
@@ -55,7 +49,7 @@
 				"          ordem_vacina = Prop_9",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> normalizandoCamposJson"
+				"     skipDuplicateMapOutputs: true) ~> normalizandoCamposCsv"
 			]
 		}
 	}
