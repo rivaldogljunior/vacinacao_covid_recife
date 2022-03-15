@@ -25,12 +25,148 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "faixa_etaria",
+									"type": "String"
+								},
+								"sink": {
+									"name": "faixa_etaria",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "sexo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "sexo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "raca_cor",
+									"type": "String"
+								},
+								"sink": {
+									"name": "raca_cor",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "municipio",
+									"type": "String"
+								},
+								"sink": {
+									"name": "municipio",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "grupo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "grupo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "categoria",
+									"type": "String"
+								},
+								"sink": {
+									"name": "categoria",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "vacina_fabricante",
+									"type": "String"
+								},
+								"sink": {
+									"name": "vacina_fabricante",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "descricao_dose",
+									"type": "String"
+								},
+								"sink": {
+									"name": "descricao_dose",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"name": "cnes",
+									"type": "String"
+								},
+								"sink": {
+									"name": "cnes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "sistema_origem",
+									"type": "String"
+								},
+								"sink": {
+									"name": "sistema_origem",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "data_vacinacao",
+									"type": "String"
+								},
+								"sink": {
+									"name": "data_vacinacao",
+									"type": "DateTime"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "ds_api_csv",
 						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_csv_generic",
+						"type": "DatasetReference",
+						"parameters": {
+							"containerName": "raw",
+							"fileName": "csvVacinados.csv"
+						}
 					}
 				]
 			}
