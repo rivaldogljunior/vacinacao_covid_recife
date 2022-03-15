@@ -26,12 +26,14 @@
 						}
 					},
 					"sink": {
-						"type": "JsonSink",
+						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "JsonWriteSettings"
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false
@@ -44,11 +46,11 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_json_generic",
+						"referenceName": "ds_csv_generic",
 						"type": "DatasetReference",
 						"parameters": {
 							"containerName": "raw",
-							"fileName": "jsonVacinacao.json"
+							"fileName": "csvVacinacao.csv"
 						}
 					}
 				]
