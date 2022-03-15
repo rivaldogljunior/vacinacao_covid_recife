@@ -1,0 +1,28 @@
+{
+	"name": "ds_abs_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_abs_json",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "csvVacinados.csv",
+				"container": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "faixa_etaria;sexo;raca_cor;municipio;grupo;categoria;vacina_fabricante;descricao_dose;cnes;sistema_origem;data_vacinacao",
+				"type": "String"
+			}
+		]
+	}
+}

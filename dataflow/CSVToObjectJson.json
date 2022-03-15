@@ -5,14 +5,22 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "ds_abs_csv",
+						"type": "DatasetReference"
+					},
 					"name": "sourceJson"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> sourceJson"
+				"source(output(",
+				"          {faixa_etaria;sexo;raca_cor;municipio;grupo;categoria;vacina_fabricante;descricao_dose;cnes;sistema_origem;data_vacinacao} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceJson"
 			]
 		}
 	}
