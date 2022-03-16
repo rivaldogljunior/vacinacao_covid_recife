@@ -54,7 +54,7 @@
 							},
 							{
 								"source": {
-									"name": "sexo",
+									"name": "idade",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -66,7 +66,7 @@
 							},
 							{
 								"source": {
-									"name": "raca_cor",
+									"name": "sexo",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -78,7 +78,7 @@
 							},
 							{
 								"source": {
-									"name": "municipio",
+									"name": "raca_cor",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -90,7 +90,7 @@
 							},
 							{
 								"source": {
-									"name": "grupo",
+									"name": "municipio",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -102,7 +102,7 @@
 							},
 							{
 								"source": {
-									"name": "categoria",
+									"name": "grupo",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -114,7 +114,7 @@
 							},
 							{
 								"source": {
-									"name": "lote",
+									"name": "categoria",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -126,7 +126,7 @@
 							},
 							{
 								"source": {
-									"name": "vacina_fabricante",
+									"name": "lote",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -138,7 +138,7 @@
 							},
 							{
 								"source": {
-									"name": "descricao_dose",
+									"name": "vacina_fabricante",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -150,7 +150,7 @@
 							},
 							{
 								"source": {
-									"name": "cnes",
+									"name": "descricao_dose",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -162,7 +162,7 @@
 							},
 							{
 								"source": {
-									"name": "sistema_origem",
+									"name": "cnes",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -174,7 +174,7 @@
 							},
 							{
 								"source": {
-									"name": "data_vacinacao",
+									"name": "sistema_origem",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -182,6 +182,18 @@
 									"type": "String",
 									"physicalType": "String",
 									"ordinal": 12
+								}
+							},
+							{
+								"source": {
+									"name": "data_vacinacao",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"type": "String",
+									"physicalType": "String",
+									"ordinal": 13
 								}
 							}
 						],
