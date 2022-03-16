@@ -183,6 +183,11 @@
 									"physicalType": "String",
 									"ordinal": 12
 								}
+							},
+							{
+								"sink": {
+									"ordinal": 13
+								}
 							}
 						],
 						"typeConversion": true,
