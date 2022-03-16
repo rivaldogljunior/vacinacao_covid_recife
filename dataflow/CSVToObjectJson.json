@@ -5,19 +5,11 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "ds_abs_csv",
-						"type": "DatasetReference"
-					},
 					"name": "sourceJson"
 				}
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "ds_json_output",
-						"type": "DatasetReference"
-					},
 					"name": "sinkJson"
 				}
 			],
@@ -27,8 +19,7 @@
 				"          {faixa_etaria;sexo;raca_cor;municipio;grupo;categoria;vacina_fabricante;descricao_dose;cnes;sistema_origem;data_vacinacao} as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> sourceJson",
+				"     validateSchema: false) ~> sourceJson",
 				"sourceJson sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['jsonVacinados.json'],",
