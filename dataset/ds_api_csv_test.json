@@ -1,0 +1,21 @@
+{
+	"name": "ds_api_csv_test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_api_covid",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
