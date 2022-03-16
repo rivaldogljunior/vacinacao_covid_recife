@@ -243,7 +243,13 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "raw_to_trusted",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"containerName": "trusted",
+								"fileName": "parquetVacinados.parquet"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,
