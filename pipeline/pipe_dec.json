@@ -85,7 +85,16 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "raw_to_trusted",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"containerName": "raw",
+								"fileName": "csvVacinados.csv"
+							},
+							"ParquetTrusted": {
+								"containerName": "trusted"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,
@@ -93,6 +102,75 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "TRUSTED_TO_BD",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "RAW_TO_TRUSTED",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.parquet",
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_parquet_generic",
+						"type": "DatasetReference",
+						"parameters": {
+							"containerName": "trsusted"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_azuresql_generic",
+						"type": "DatasetReference",
+						"parameters": {
+							"schemaName": "saleLT",
+							"tableName": "trusted_vacinacao_tb"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []
