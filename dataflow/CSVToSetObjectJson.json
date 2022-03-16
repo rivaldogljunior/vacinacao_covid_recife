@@ -9,18 +9,39 @@
 						"referenceName": "ds_csv_blob_storage",
 						"type": "DatasetReference"
 					},
-					"name": "sourceJson"
+					"name": "sourceCsv"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "rawJson"
+				}
+			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          {faixa_etaria;sexo;raca_cor;municipio;grupo;categoria;vacina_fabricante;descricao_dose;cnes;sistema_origem;data_vacinacao} as string",
+				"          faixa_etaria as string,",
+				"          idade as short,",
+				"          sexo as string,",
+				"          raca_cor as string,",
+				"          municipio as string,",
+				"          grupo as string,",
+				"          categoria as string,",
+				"          lote as string,",
+				"          vacina_fabricante as string,",
+				"          descricao_dose as short,",
+				"          cnes as string,",
+				"          sistema_origem as string,",
+				"          data_vacinacao as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> sourceJson"
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> sourceCsv",
+				"sourceCsv sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> rawJson"
 			]
 		}
 	}
