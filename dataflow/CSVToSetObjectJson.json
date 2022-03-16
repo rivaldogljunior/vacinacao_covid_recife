@@ -1,31 +1,26 @@
 {
-	"name": "CSVToObjectJson",
+	"name": "CSVToSetObjectJson",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "ds_csv_blob_storage",
+						"type": "DatasetReference"
+					},
 					"name": "sourceJson"
 				}
 			],
-			"sinks": [
-				{
-					"name": "sinkJson"
-				}
-			],
+			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          {faixa_etaria;sexo;raca_cor;municipio;grupo;categoria;vacina_fabricante;descricao_dose;cnes;sistema_origem;data_vacinacao} as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false) ~> sourceJson",
-				"sourceJson sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['jsonVacinados.json'],",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> sinkJson"
+				"     ignoreNoFilesFound: false) ~> sourceJson"
 			]
 		}
 	}
