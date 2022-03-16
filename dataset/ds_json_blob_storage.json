@@ -1,10 +1,6 @@
 {
 	"name": "ds_json_blob_storage",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_blob_storage_json",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
