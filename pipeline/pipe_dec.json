@@ -85,16 +85,7 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "raw_to_trusted",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"source1": {
-								"containerName": "raw",
-								"fileName": "csvVacinados.csv"
-							},
-							"ParquetTrusted": {
-								"containerName": "trusted"
-							}
-						}
+						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
@@ -104,7 +95,7 @@
 				}
 			},
 			{
-				"name": "TRUSTED_TO_BD",
+				"name": "TRUSTED_TO_DB",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -163,8 +154,8 @@
 						"referenceName": "ds_azuresql_generic",
 						"type": "DatasetReference",
 						"parameters": {
-							"schemaName": "saleLT",
-							"tableName": "trusted_vacinacao_tb"
+							"schemaName": "salesLT",
+							"tableName": "trusted_vacinados_tb"
 						}
 					}
 				]
