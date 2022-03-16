@@ -32,7 +32,7 @@
 						},
 						"formatSettings": {
 							"type": "JsonWriteSettings",
-							"filePattern": "arrayOfObjects"
+							"filePattern": "setOfObjects"
 						}
 					},
 					"enableStaging": false,
@@ -41,123 +41,15 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "faixa_etaria",
-									"type": "String"
+									"ordinal": 1
 								},
 								"sink": {
-									"name": "faixa_etaria",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "sexo",
-									"type": "String"
-								},
-								"sink": {
-									"name": "sexo",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "raca_cor",
-									"type": "String"
-								},
-								"sink": {
-									"name": "raca_cor",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "municipio",
-									"type": "String"
-								},
-								"sink": {
-									"name": "municipio",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "grupo",
-									"type": "String"
-								},
-								"sink": {
-									"name": "grupo",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "categoria",
-									"type": "String"
-								},
-								"sink": {
-									"name": "categoria",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "vacina_fabricante",
-									"type": "String"
-								},
-								"sink": {
-									"name": "vacina_fabricante",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "descricao_dose",
-									"type": "String"
-								},
-								"sink": {
-									"name": "descricao_dose",
-									"type": "Int16"
-								}
-							},
-							{
-								"source": {
-									"name": "cnes",
-									"type": "String"
-								},
-								"sink": {
-									"name": "cnes",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "sistema_origem",
-									"type": "String"
-								},
-								"sink": {
-									"name": "sistema_origem",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "data_vacinacao",
-									"type": "String"
-								},
-								"sink": {
-									"name": "data_vacinacao",
-									"type": "DateTime"
+									"path": "$['faixa_etaria;sexo;raca_cor;municipio;grupo;categoria;vacina_fabricante;descricao_dose;cnes;sistema_origem;data_vacinacao']"
 								}
 							}
 						]
 					}
 				},
-				"inputs": [
-					{
-						"referenceName": "ds_api_csv",
-						"type": "DatasetReference"
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "ds_json_generic",
@@ -168,30 +60,6 @@
 						}
 					}
 				]
-			},
-			{
-				"name": "Data flow1",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "CSVToObjectJson",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
 			}
 		],
 		"annotations": []
