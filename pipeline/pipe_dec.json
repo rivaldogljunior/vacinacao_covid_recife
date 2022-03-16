@@ -85,21 +85,7 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "raw_to_trusted",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"source1": {
-								"containerName": "raw",
-								"fileName": "csvVacinados.csv"
-							}
-						},
-						"linkedServiceParameters": {
-							"source1": {
-								"schemaLinkedService": {
-									"containerName": "trusted",
-									"fileName": "csvVacinados.csv"
-								}
-							}
-						}
+						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
