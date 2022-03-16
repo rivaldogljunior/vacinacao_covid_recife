@@ -3,38 +3,11 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [
-				{
-					"name": "sourceCsv"
-				}
-			],
+			"sources": [],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "normalizandoCamposCsv"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     inferDriftedColumnTypes: true,",
-				"     wildcardPaths:['*.json*']) ~> sourceCsv",
-				"sourceCsv foldDown(unroll(),",
-				"     mapColumn(",
-				"          faixa_etaria = Prop_0,",
-				"          CNES = Prop_10,",
-				"          sistema_origem = Prop_11,",
-				"          data_vacinacao = Prop_12,",
-				"          genero = Prop_2,",
-				"          raca_cor = Prop_3,",
-				"          municipio = Prop_4,",
-				"          grupo = Prop_5,",
-				"          categoria = Prop_6,",
-				"          vacina_fabricante = Prop_8,",
-				"          ordem_vacina = Prop_9",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> normalizandoCamposCsv"
+				""
 			]
 		}
 	}
