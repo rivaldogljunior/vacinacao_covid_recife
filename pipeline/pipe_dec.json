@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "API_TO_RAW_DLS",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -27,6 +27,9 @@
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
@@ -51,8 +54,12 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_api_csv",
-						"type": "DatasetReference"
+						"referenceName": "ds_csv_generic",
+						"type": "DatasetReference",
+						"parameters": {
+							"containerName": "raw",
+							"fileName": "csvVacinados.csv"
+						}
 					}
 				]
 			}
