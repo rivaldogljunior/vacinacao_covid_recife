@@ -24,8 +24,8 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          {_col0_} as string,",
-				"          {_col1_} as short,",
+				"          faixa_etaria as string,",
+				"          sexo as short,",
 				"          {_col2_} as string,",
 				"          {_col3_} as string,",
 				"          {_col4_} as string,",
