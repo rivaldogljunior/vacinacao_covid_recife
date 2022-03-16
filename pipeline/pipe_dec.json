@@ -246,8 +246,11 @@
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"source1": {
-								"containerName": "trusted",
-								"fileName": "parquetVacinados.parquet"
+								"containerName": "raw",
+								"fileName": "csvVacinados.csv"
+							},
+							"ParquetTrusted": {
+								"containerName": "trusted"
 							}
 						}
 					},
