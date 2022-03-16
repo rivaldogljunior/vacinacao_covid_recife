@@ -62,6 +62,51 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "RAW_TO_TRUSTED",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "API_TO_RAW_DLS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "raw_to_trusted",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"containerName": "raw",
+								"fileName": "csvVacinados.csv"
+							}
+						},
+						"linkedServiceParameters": {
+							"source1": {
+								"schemaLinkedService": {
+									"containerName": "trusted",
+									"fileName": "csvVacinados.csv"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"annotations": []
