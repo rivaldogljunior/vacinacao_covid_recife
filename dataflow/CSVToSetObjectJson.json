@@ -14,6 +14,10 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "ds_json_blob_storage",
+						"type": "DatasetReference"
+					},
 					"name": "rawJson"
 				}
 			],
@@ -40,8 +44,10 @@
 				"     ignoreNoFilesFound: false) ~> sourceCsv",
 				"sourceCsv sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     partitionFileNames:['jsonSetVacinados.json'],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> rawJson"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> rawJson"
 			]
 		}
 	}
