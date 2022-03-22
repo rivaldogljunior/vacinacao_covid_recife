@@ -1,0 +1,25 @@
+{
+	"name": "DF_SOURCE_RAW_CSV",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_csv_generic",
+						"type": "DatasetReference"
+					},
+					"name": "sourceApi"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> sourceApi"
+			]
+		}
+	}
+}

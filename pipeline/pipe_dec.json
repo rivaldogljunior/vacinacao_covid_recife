@@ -42,24 +42,12 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "faixa_etaria",
+									"name": "cpf",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "faixa_etaria",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "idade",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "idade",
+									"name": "cpf",
 									"type": "String",
 									"physicalType": "String"
 								}
@@ -78,30 +66,6 @@
 							},
 							{
 								"source": {
-									"name": "raca_cor",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "raca_cor",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "municipio",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "municipio",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "grupo",
 									"type": "String",
 									"physicalType": "String"
@@ -114,72 +78,24 @@
 							},
 							{
 								"source": {
-									"name": "categoria",
+									"name": "vacina",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "categoria",
+									"name": "vacina",
 									"type": "String",
 									"physicalType": "String"
 								}
 							},
 							{
 								"source": {
-									"name": "lote",
+									"name": "dose",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "lote",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "vacina_fabricante",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "vacina_fabricante",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "descricao_dose",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "descricao_dose",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "cnes",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "cnes",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "sistema_origem",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "sistema_origem",
+									"name": "dose",
 									"type": "String",
 									"physicalType": "String"
 								}
@@ -192,6 +108,18 @@
 								},
 								"sink": {
 									"name": "data_vacinacao",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "local_vacinacao",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "local_vacinacao",
 									"type": "String",
 									"physicalType": "String"
 								}
@@ -216,10 +144,34 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"containerName": "raw",
-							"fileName": "csvVacinados.csv"
+							"fileName": "setVacinados.csv"
 						}
 					}
 				]
+			},
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_SOURCE_RAW_CSV",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"annotations": []
