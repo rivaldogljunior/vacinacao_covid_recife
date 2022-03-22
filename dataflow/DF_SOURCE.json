@@ -1,5 +1,5 @@
 {
-	"name": "DF_SOURCE_RAW_CSV",
+	"name": "DF_SOURCE",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -51,11 +51,13 @@
 				"aggregateCpf sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
+				"     truncate: true,",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinkData"
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1) ~> sinkData"
 			]
 		}
 	}
