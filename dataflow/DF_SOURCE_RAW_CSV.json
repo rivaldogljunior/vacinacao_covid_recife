@@ -12,10 +12,14 @@
 					"name": "sourceApi"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sinkData"
+				}
+			],
 			"transformations": [
 				{
-					"name": "aggregateDose"
+					"name": "aggregateCpf"
 				}
 			],
 			"scriptLines": [
@@ -39,7 +43,11 @@
 				"          first_data_vacinacao = first(data_vacinacao),",
 				"          last_data_vacinacao2 = last(data_vacinacao),",
 				"          first_local_vacinacao = first(local_vacinacao),",
-				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateDose"
+				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpf",
+				"aggregateCpf sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkData"
 			]
 		}
 	}
