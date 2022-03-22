@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "http://dados.recife.pe.gov.br/dataset/7ccb3816-0d62-49e1-b39a-3159870883b0/resource/99b42b09-95af-47de-8411-ab99c380c3ef/download/vacinados.csv",
+			"url": "http://dados.recife.pe.gov.br/dataset/f381d9ea-4839-44a6-b4fe-788239189900/resource/966e9c4c-df45-40d7-9c58-2f13c61a6d28/download/vacinados.csv",
 			"enableServerCertificateValidation": false,
 			"authenticationType": "Anonymous"
 		}
