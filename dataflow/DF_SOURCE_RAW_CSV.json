@@ -13,12 +13,32 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "aggregateDose"
+				}
+			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          cpf as string,",
+				"          sexo as string,",
+				"          grupo as string,",
+				"          vacina as string,",
+				"          dose as short,",
+				"          data_vacinacao as date,",
+				"          local_vacinacao as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> sourceApi"
+				"     ignoreNoFilesFound: false) ~> sourceApi",
+				"sourceApi aggregate(groupBy(cpf,",
+				"          sexo),",
+				"     grupo = ERROR_FUNCTION(''),",
+				"          vacina = ERROR_FUNCTION(''),",
+				"          dose = count(cpf),",
+				"          data_vacinacao = ERROR_FUNCTION(''),",
+				"          local_vacinacao = ERROR_FUNCTION('')) ~> aggregateDose"
 			]
 		}
 	}
