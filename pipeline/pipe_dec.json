@@ -78,18 +78,6 @@
 							},
 							{
 								"source": {
-									"name": "vacina",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "vacina",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "dose",
 									"type": "String",
 									"physicalType": "String"
