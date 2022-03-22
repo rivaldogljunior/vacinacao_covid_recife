@@ -32,13 +32,14 @@
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> sourceApi",
-				"sourceApi aggregate(groupBy(cpf,",
-				"          sexo),",
-				"     grupo = ERROR_FUNCTION(''),",
-				"          vacina = ERROR_FUNCTION(''),",
-				"          dose = count(cpf),",
-				"          data_vacinacao = ERROR_FUNCTION(''),",
-				"          local_vacinacao = ERROR_FUNCTION('')) ~> aggregateDose"
+				"sourceApi aggregate(groupBy(cpf),",
+				"     dose = count(cpf),",
+				"          sexo = first(sexo),",
+				"          grupo = first(grupo),",
+				"          first_data_vacinacao = first(data_vacinacao),",
+				"          last_data_vacinacao2 = last(data_vacinacao),",
+				"          first_local_vacinacao = first(local_vacinacao),",
+				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateDose"
 			]
 		}
 	}
