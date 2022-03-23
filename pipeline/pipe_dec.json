@@ -166,7 +166,7 @@
 								"fileName": "setVacinados.csv"
 							},
 							"sinkData": {
-								"containerName": "raw",
+								"containerName": "trsuted",
 								"fileName": "setVacinados.csv"
 							}
 						}
