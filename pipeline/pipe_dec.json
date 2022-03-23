@@ -166,15 +166,8 @@
 								"fileName": "setVacinados.csv"
 							},
 							"sinkData": {
-								"containerName": "trusted",
-								"fileName": "setVacinadosTrust.csv"
-							}
-						},
-						"linkedServiceParameters": {
-							"sinkData": {
-								"schemaLinkedService": {
-									"containerName": "raw"
-								}
+								"containerName": "raw",
+								"fileName": "setVacinados.csv"
 							}
 						}
 					},
@@ -188,14 +181,7 @@
 			{
 				"name": "TRUTED_TO_DB",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "DF_SOURCE",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
