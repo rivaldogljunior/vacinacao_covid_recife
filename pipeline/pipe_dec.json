@@ -181,7 +181,14 @@
 			{
 				"name": "TRUTED_TO_DB",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "DF_SOURCE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -231,7 +238,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"containerName": "trusted",
-							"fileName": "csvVacinados.csv"
+							"fileName": "setVacinados.csv"
 						}
 					}
 				],
