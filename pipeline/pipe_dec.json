@@ -24,7 +24,7 @@
 								"fileName": "setVacinados.csv"
 							},
 							"sinkToTrusted": {
-								"containerName": "trusted",
+								"containerName": "originals",
 								"fileName": "setVacinados.csv"
 							}
 						}
