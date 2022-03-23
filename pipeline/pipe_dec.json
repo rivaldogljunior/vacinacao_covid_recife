@@ -164,9 +164,6 @@
 							"sourceApi": {
 								"containerName": "raw",
 								"fileName": "setVacinados.csv"
-							},
-							"sinkData": {
-								"containerName": "trusted"
 							}
 						}
 					},
@@ -176,6 +173,78 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "TRUTED_TO_DB",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "DF_SOURCE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_csv_generic",
+						"type": "DatasetReference",
+						"parameters": {
+							"containerName": "trusted",
+							"fileName": "csvVacinados.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_azuresql_generic",
+						"type": "DatasetReference",
+						"parameters": {
+							"schemaName": "SalesLT",
+							"tableName": "tb_vacinados"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []

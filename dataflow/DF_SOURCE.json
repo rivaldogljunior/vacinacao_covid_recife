@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_parquet_generic",
+						"referenceName": "ds_csv_generic",
 						"type": "DatasetReference"
 					},
 					"name": "sinkData"
@@ -50,14 +50,14 @@
 				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpf",
 				"aggregateCpf sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'parquet',",
 				"     truncate: true,",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     saveOrder: 1) ~> sinkData"
+				"     saveOrder: 1,",
+				"     format: 'parquet') ~> sinkData"
 			]
 		}
 	}
