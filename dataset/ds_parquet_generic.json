@@ -16,7 +16,10 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "*.parquet",
-				"fileSystem": "trusted"
+				"fileSystem": {
+					"value": "@dataset().containerName",
+					"type": "Expression"
+				}
 			},
 			"compressionCodec": "snappy"
 		},
