@@ -12,7 +12,15 @@
 					"name": "sourceApi"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_csv_generic",
+						"type": "DatasetReference"
+					},
+					"name": "sinkToTrusted"
+				}
+			],
 			"transformations": [
 				{
 					"name": "aggregateCpf"
@@ -38,7 +46,14 @@
 				"          first_data_vacinacao = first(data_vacinacao),",
 				"          last_data_vacinacao = last(data_vacinacao),",
 				"          first_local_vacinacao = first(local_vacinacao),",
-				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpf"
+				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpf",
+				"aggregateCpf sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkToTrusted"
 			]
 		}
 	}
