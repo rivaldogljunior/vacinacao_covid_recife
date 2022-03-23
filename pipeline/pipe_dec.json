@@ -166,7 +166,7 @@
 								"fileName": "setVacinados.csv"
 							},
 							"sinkData": {
-								"containerName": "trsuted",
+								"containerName": "trusted",
 								"fileName": "setVacinados.csv"
 							}
 						}
