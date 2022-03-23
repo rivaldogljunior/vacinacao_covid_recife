@@ -164,6 +164,9 @@
 							"sourceApi": {
 								"containerName": "raw",
 								"fileName": "setVacinados.csv"
+							},
+							"sinkData": {
+								"containerName": "trusted"
 							}
 						}
 					},
