@@ -164,6 +164,17 @@
 							"sourceApi": {
 								"containerName": "raw",
 								"fileName": "setVacinados.csv"
+							},
+							"sinkData": {
+								"containerName": "trusted",
+								"fileName": "setVacinadosTrust.csv"
+							}
+						},
+						"linkedServiceParameters": {
+							"sinkData": {
+								"schemaLinkedService": {
+									"containerName": "raw"
+								}
 							}
 						}
 					},
