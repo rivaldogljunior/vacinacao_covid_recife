@@ -49,11 +49,14 @@
 				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpf",
 				"aggregateCpf sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     partitionFileNames:['setVacinados.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinkToTrusted"
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     partitionBy('hash', 1)) ~> sinkToTrusted"
 			]
 		}
 	}
