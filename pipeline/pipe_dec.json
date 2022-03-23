@@ -209,7 +209,10 @@
 						"type": "AzureSqlSink",
 						"writeBehavior": "upsert",
 						"upsertSettings": {
-							"useTempDB": true
+							"useTempDB": true,
+							"keys": [
+								"cpf"
+							]
 						},
 						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate",
