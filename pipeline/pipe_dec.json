@@ -21,7 +21,7 @@
 						"datasetParameters": {
 							"sourceApi": {
 								"containerName": "raw",
-								"fileName": "setVacinados.csv"
+								"fileName": "setVacinados"
 							},
 							"sinkToTrusted": {
 								"containerName": "trusted",
