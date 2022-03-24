@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_csv_generic",
+						"referenceName": "dl_parquet_generic",
 						"type": "DatasetReference"
 					},
 					"name": "sinkToTrusted"
@@ -57,6 +57,7 @@
 				"aggregateCpf filter(cpf!='null') ~> filterCpfNull",
 				"filterCpfNull sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     format: 'parquet',",
 				"     partitionFileNames:['setVacinados.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
