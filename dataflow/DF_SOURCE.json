@@ -48,7 +48,6 @@
 				"sourceApi aggregate(groupBy(cpf,",
 				"          nome),",
 				"     dose = count(cpf),",
-				"          nome = ERROR_FUNCTION(''),",
 				"          sexo = ERROR_FUNCTION(''),",
 				"          grupo = ERROR_FUNCTION(''),",
 				"          first_data_vacinacao = first(data_vacinacao),",
