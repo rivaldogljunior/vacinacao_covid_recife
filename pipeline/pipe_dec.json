@@ -28,19 +28,11 @@
 						"datasetParameters": {
 							"sourceApi": {
 								"containerName": "raw",
-								"fileName": "setVacinados"
+								"fileName": "setVacinados.csv"
 							},
 							"sinkToTrusted": {
 								"containerName": "trusted",
 								"fileName": "setVacinadosTrust.csv"
-							}
-						},
-						"linkedServiceParameters": {
-							"sinkToTrusted": {
-								"schemaLinkedService": {
-									"containerName": "trusted",
-									"fileName": "setVacinadosTrust.csv"
-								}
 							}
 						}
 					},
