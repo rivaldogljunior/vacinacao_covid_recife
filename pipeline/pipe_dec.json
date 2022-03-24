@@ -34,6 +34,14 @@
 								"containerName": "trusted",
 								"fileName": "setVacinados.csv"
 							}
+						},
+						"linkedServiceParameters": {
+							"sinkToTrusted": {
+								"schemaLinkedService": {
+									"containerName": "trusted",
+									"fileName": "setVacinados"
+								}
+							}
 						}
 					},
 					"compute": {
