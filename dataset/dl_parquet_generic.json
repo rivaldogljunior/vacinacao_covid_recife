@@ -9,7 +9,9 @@
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation"
+				"type": "AzureBlobFSLocation",
+				"fileName": "setVacinadosTrusted.parquet",
+				"fileSystem": "trusted"
 			},
 			"compressionCodec": "snappy"
 		},
