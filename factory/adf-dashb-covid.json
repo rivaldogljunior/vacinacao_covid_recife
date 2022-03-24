@@ -1,0 +1,9 @@
+{
+	"name": "adf-dashb-covid",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "83c669d7-bc79-46fb-85eb-2e1db99f2d6e",
+		"tenantId": "63474290-3700-401b-bc81-f0b095ec8317"
+	}
+}

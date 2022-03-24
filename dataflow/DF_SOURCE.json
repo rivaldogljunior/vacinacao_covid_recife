@@ -1,0 +1,71 @@
+{
+	"name": "DF_SOURCE",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_csv_generic",
+						"type": "DatasetReference"
+					},
+					"name": "sourceApi"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_csv_generic",
+						"type": "DatasetReference"
+					},
+					"name": "sinkToTrusted"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregateCpf"
+				},
+				{
+					"name": "filterCpfNull"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          cpf as string,",
+				"          nome as string,",
+				"          sexo as string,",
+				"          grupo as string,",
+				"          vacina as string,",
+				"          lote as string,",
+				"          dose as short,",
+				"          data_vacinacao as date,",
+				"          local_vacinacao as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> sourceApi",
+				"sourceApi aggregate(groupBy(cpf,",
+				"          nome),",
+				"     dose = count(cpf),",
+				"          sexo = first(sexo),",
+				"          grupo = first(grupo),",
+				"          first_data_vacinacao = first(data_vacinacao),",
+				"          last_data_vacinacao = last(data_vacinacao),",
+				"          first_local_vacinacao = first(local_vacinacao),",
+				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpf",
+				"aggregateCpf filter(cpf!='null') ~> filterCpfNull",
+				"filterCpfNull sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['setVacinados.csv'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     partitionBy('hash', 1)) ~> sinkToTrusted"
+			]
+		}
+	}
+}
