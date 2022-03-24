@@ -29,10 +29,6 @@
 							"sourceApi": {
 								"containerName": "raw",
 								"fileName": "setVacinados.csv"
-							},
-							"sinkToTrusted": {
-								"containerName": "trusted",
-								"fileName": "setVacinadosTrust.csv"
 							}
 						}
 					},
