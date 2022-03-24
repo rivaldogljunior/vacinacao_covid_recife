@@ -24,6 +24,9 @@
 			"transformations": [
 				{
 					"name": "aggregateCpf"
+				},
+				{
+					"name": "filterCpfNull"
 				}
 			],
 			"scriptLines": [
@@ -51,7 +54,8 @@
 				"          last_data_vacinacao = last(data_vacinacao),",
 				"          first_local_vacinacao = first(local_vacinacao),",
 				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpf",
-				"aggregateCpf sink(allowSchemaDrift: true,",
+				"aggregateCpf filter(cpf!='null') ~> filterCpfNull",
+				"filterCpfNull sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['setVacinados.csv'],",
 				"     umask: 0022,",
