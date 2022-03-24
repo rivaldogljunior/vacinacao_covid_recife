@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "COPY_API_TO_RAW",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -18,24 +18,137 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false,
-						"tableOption": "autoCreate",
-						"disableMetricsCollection": false
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
 					},
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "cpf",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cpf",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "nome",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "nome",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "sexo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sexo",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "grupo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "grupo",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "vacina",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "vacina",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "lote",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "lote",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "dose",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "dose",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "data_vacinacao",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "data_vacinacao",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "local_vacinacao",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "local_vacinacao",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -45,21 +158,17 @@
 				},
 				"inputs": [
 					{
+						"referenceName": "ds_api_csv",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
 						"referenceName": "ds_csv_generic",
 						"type": "DatasetReference",
 						"parameters": {
 							"containerName": "raw",
 							"fileName": "setVacinados.csv"
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_azuresql_generic",
-						"type": "DatasetReference",
-						"parameters": {
-							"schemaName": "SalesLT",
-							"tableName": "tb_set_vacinados"
 						}
 					}
 				]
