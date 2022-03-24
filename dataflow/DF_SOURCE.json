@@ -58,7 +58,7 @@
 				"filterCpfNull sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
-				"     partitionFileNames:['setVacinados.csv'],",
+				"     partitionFileNames:['setVacinadosTrusted.parquet'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
