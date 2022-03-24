@@ -38,7 +38,7 @@
 						"linkedServiceParameters": {
 							"sinkToTrusted": {
 								"schemaLinkedService": {
-									"containerName": "trusted",
+									"containerName": "raw",
 									"fileName": "setVacinados"
 								}
 							}
