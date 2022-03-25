@@ -27,6 +27,9 @@
 				},
 				{
 					"name": "filterCpfNull"
+				},
+				{
+					"name": "aggregateDuplicateRow"
 				}
 			],
 			"scriptLines": [
@@ -43,19 +46,19 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> sourceApi",
 				"sourceApi aggregate(groupBy(cpf,",
 				"          nome),",
 				"     dose = count(cpf),",
 				"          sexo = last(sexo),",
 				"          grupo = last(grupo),",
-				"          first_data_vacinacao = first(data_vacinacao),",
-				"          last_data_vacinacao = last(data_vacinacao),",
-				"          first_local_vacinacao = first(local_vacinacao),",
-				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpf",
+				"          first_data_vacinacao = last(data_vacinacao),",
+				"          last_data_vacinacao = first(data_vacinacao),",
+				"          first_local_vacinacao = last(local_vacinacao),",
+				"          last_local_vacinacao = first(local_vacinacao)) ~> aggregateCpf",
 				"aggregateCpf filter(cpf!='null') ~> filterCpfNull",
-				"filterCpfNull sink(allowSchemaDrift: true,",
+				"filterCpfNull aggregate(each(match(), ERROR_FUNCTION('') = ERROR_FUNCTION(''))) ~> aggregateDuplicateRow",
+				"aggregateDuplicateRow sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     partitionFileNames:['setVacinadosTrusted.parquet'],",
