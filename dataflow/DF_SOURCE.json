@@ -58,7 +58,7 @@
 				"          last_data_vacinacao = last(data_vacinacao),",
 				"          first_local_vacinacao = first(local_vacinacao),",
 				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpfNome",
-				"aggregateCpfNome filter(cpf!='null') ~> filterCpfNull",
+				"aggregateCpfNome filter(cpf!='null' && dose <= 3) ~> filterCpfNull",
 				"filterCpfNull sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
