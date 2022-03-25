@@ -23,13 +23,13 @@
 			],
 			"transformations": [
 				{
+					"name": "DistinctRows"
+				},
+				{
 					"name": "aggregateCpf"
 				},
 				{
 					"name": "filterCpfNull"
-				},
-				{
-					"name": "aggregateDuplicateRow"
 				}
 			],
 			"scriptLines": [
@@ -47,7 +47,9 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> sourceApi",
-				"sourceApi aggregate(groupBy(cpf,",
+				"sourceApi aggregate(groupBy(mycols = sha2(256,columns())),",
+				"     each(match(true()), $$ = first($$))) ~> DistinctRows",
+				"DistinctRows aggregate(groupBy(cpf,",
 				"          nome),",
 				"     dose = count(cpf),",
 				"          sexo = last(sexo),",
@@ -57,8 +59,7 @@
 				"          first_local_vacinacao = last(local_vacinacao),",
 				"          last_local_vacinacao = first(local_vacinacao)) ~> aggregateCpf",
 				"aggregateCpf filter(cpf!='null') ~> filterCpfNull",
-				"filterCpfNull aggregate(each(match(), ERROR_FUNCTION('') = ERROR_FUNCTION(''))) ~> aggregateDuplicateRow",
-				"aggregateDuplicateRow sink(allowSchemaDrift: true,",
+				"filterCpfNull sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     partitionFileNames:['setVacinadosTrusted.parquet'],",
