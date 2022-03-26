@@ -410,6 +410,10 @@
 							"sourceTrusted": {
 								"schemaName": "SalesLT",
 								"tableName": "tb_vacinados_trusted"
+							},
+							"sinkRefined": {
+								"containerName": "refined",
+								"fileName": "setVacinados.csv"
 							}
 						}
 					},
