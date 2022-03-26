@@ -12,14 +12,54 @@
 					"name": "sourceTrusted"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_azuresql_generic",
+						"type": "DatasetReference"
+					},
+					"name": "sinkDb"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregateCpfNome"
+				}
+			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          cpf as string,",
+				"          nome as string,",
+				"          sexo as string,",
+				"          grupo as string,",
+				"          vacina as string,",
+				"          lote as string,",
+				"          dose as short,",
+				"          data_vacinacao as date,",
+				"          local_vacinacao as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> sourceTrusted"
+				"     format: 'parquet') ~> sourceTrusted",
+				"sourceTrusted aggregate(groupBy(cpf,",
+				"          nome),",
+				"     sexo = last(sexo),",
+				"          grupo = last(grupo),",
+				"          doses = max(dose),",
+				"          last_data_vacinacao = max(data_vacinacao)) ~> aggregateCpfNome",
+				"aggregateCpfNome sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     truncate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkDb"
 			]
 		}
 	}

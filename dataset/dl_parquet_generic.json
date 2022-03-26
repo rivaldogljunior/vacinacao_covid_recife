@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "setVacinados.parquet",
+				"fileName": "part-merged.snappy.parquet",
 				"fileSystem": "trusted"
 			},
 			"compressionCodec": "snappy"
