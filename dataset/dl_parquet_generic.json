@@ -13,7 +13,7 @@
 				"fileName": "setVacinadosParquet.parquet",
 				"fileSystem": "trusted"
 			},
-			"compressionCodec": "none"
+			"compressionCodec": "snappy"
 		},
 		"schema": []
 	}
