@@ -23,9 +23,6 @@
 			],
 			"transformations": [
 				{
-					"name": "aggregateCpfNome"
-				},
-				{
 					"name": "filterCpfNull"
 				},
 				{
@@ -37,12 +34,7 @@
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> sourceApi",
-				"sourceApi aggregate(groupBy(cpf,",
-				"          nome),",
-				"     dose = count(dose),",
-				"          sexo = last(sexo),",
-				"          grupo = last(grupo)) ~> aggregateCpfNome",
-				"aggregateCpfNome filter(cpf!='null' && dose <= 3) ~> filterCpfNull",
+				"sourceApi filter(cpf!='null' && dose <= 3) ~> filterCpfNull",
 				"filterCpfNull aggregate(groupBy(cpf,",
 				"          nome,",
 				"          dose),",
