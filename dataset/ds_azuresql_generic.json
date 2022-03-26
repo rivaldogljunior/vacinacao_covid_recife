@@ -17,7 +17,7 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "Vacina",
+			"schema": "SalesLT",
 			"table": "tb_vacinados_trusted"
 		}
 	},
