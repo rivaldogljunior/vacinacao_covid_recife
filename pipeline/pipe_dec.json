@@ -195,10 +195,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DF_SOURCE",
+						"referenceName": "RAW_TO_TRUSTED_FILTERED_CPF_NULL",
 						"type": "DataFlowReference",
 						"datasetParameters": {
-							"sourceApi": {
+							"sourceRaw": {
 								"containerName": "raw",
 								"fileName": "setVacinados.csv"
 							}

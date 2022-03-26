@@ -1,5 +1,5 @@
 {
-	"name": "DF_SOURCE",
+	"name": "RAW_TO_TRUSTED_FILTERED_CPF_NULL",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -9,16 +9,21 @@
 						"referenceName": "ds_csv_generic",
 						"type": "DatasetReference"
 					},
-					"name": "sourceApi"
+					"name": "sourceRaw"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dl_parquet_generic",
+						"type": "DatasetReference"
+					},
+					"name": "sinkTrusted"
+				}
+			],
 			"transformations": [
 				{
 					"name": "filterCpfNull"
-				},
-				{
-					"name": "aggregateDistinctRows"
 				}
 			],
 			"scriptLines": [
@@ -36,14 +41,16 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> sourceApi",
-				"sourceApi filter(cpf!='null') ~> filterCpfNull",
-				"filterCpfNull aggregate(groupBy(cpf,",
-				"          nome),",
-				"     sexo = last(sexo),",
-				"          grupo = last(grupo),",
-				"          doses = count(dose),",
-				"          last_vacinacao = last(data_vacinacao)) ~> aggregateDistinctRows"
+				"     ignoreNoFilesFound: false) ~> sourceRaw",
+				"sourceRaw filter(cpf!='null') ~> filterCpfNull",
+				"filterCpfNull sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkTrusted"
 			]
 		}
 	}
