@@ -38,8 +38,11 @@
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> sourceApi",
 				"sourceApi filter(cpf!='null') ~> filterCpfNull",
-				"filterCpfNull aggregate(groupBy(mycols = sha2(256,cpf,nome,dose)),",
-				"     each(match(true()), $$ = first($$))) ~> aggregateDistinctRows"
+				"filterCpfNull aggregate(groupBy(cpf,",
+				"          nome,",
+				"          dose,",
+				"          data_vacinacao),",
+				"     each(match(true()), $$ = last($$))) ~> aggregateDistinctRows"
 			]
 		}
 	}
