@@ -23,7 +23,7 @@
 			],
 			"transformations": [
 				{
-					"name": "aggregateCpfNome"
+					"name": "aggregateNome"
 				}
 			],
 			"scriptLines": [
@@ -43,12 +43,13 @@
 				"     inferDriftedColumnTypes: true,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sourceTrusted",
-				"sourceTrusted aggregate(groupBy(nome),",
+				"sourceTrusted aggregate(groupBy(cpf,",
+				"          nome),",
 				"     sexo = last(sexo),",
 				"          grupo = last(grupo),",
 				"          doses = max(dose),",
-				"          ultima_vacinacao = max(data_vacinacao)) ~> aggregateCpfNome",
-				"aggregateCpfNome sink(allowSchemaDrift: true,",
+				"          ultima_vacinacao = max(data_vacinacao)) ~> aggregateNome",
+				"aggregateNome sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     umask: 0022,",
 				"     preCommands: [],",
