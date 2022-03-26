@@ -16,6 +16,9 @@
 			"transformations": [
 				{
 					"name": "filterCpfNull"
+				},
+				{
+					"name": "aggregateDistinctRows"
 				}
 			],
 			"scriptLines": [
@@ -34,7 +37,9 @@
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> sourceApi",
-				"sourceApi filter(cpf!='null') ~> filterCpfNull"
+				"sourceApi filter(cpf!='null') ~> filterCpfNull",
+				"filterCpfNull aggregate(groupBy(mycols = sha2(256,columns())),",
+				"     each(match(true()), $$ = first($$))) ~> aggregateDistinctRows"
 			]
 		}
 	}
