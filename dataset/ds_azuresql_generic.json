@@ -2,7 +2,7 @@
 	"name": "ds_azuresql_generic",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_sqldb",
+			"referenceName": "ls_dbsql",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
