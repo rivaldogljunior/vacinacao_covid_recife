@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "COPY_API_TO_RAW",
+				"name": "CD_API_TO_RAW",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -175,48 +175,11 @@
 				]
 			},
 			{
-				"name": "COPY_RAW_TO_TRUSTED",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "COPY_API_TO_RAW",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "RAW_TO_TRUSTED_FILTERED_CPF_NULL",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"sourceRaw": {
-								"containerName": "raw",
-								"fileName": "setVacinados.csv"
-							}
-						}
-					},
-					"compute": {
-						"coreCount": 16,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "COPY_TRUSTED_TO_DB",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "COPY_RAW_TO_TRUSTED",
+						"activity": "Copy data1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -238,6 +201,215 @@
 							"sinkDb": {
 								"schemaName": "Vacina",
 								"tableName": "tb_vacinados_trusted"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "DF_FILTER_CPF_NULL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "cpf",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "cpf",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "nome",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "nome",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "sexo",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "sexo",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "grupo",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "grupo",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "vacina",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "vacina",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "lote",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "lote",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "dose",
+									"type": "Int16",
+									"physicalType": "INT_16"
+								},
+								"sink": {
+									"name": "dose",
+									"type": "Int16",
+									"physicalType": "Int16"
+								}
+							},
+							{
+								"source": {
+									"name": "data_vacinacao",
+									"type": "DateTime",
+									"physicalType": "DATE"
+								},
+								"sink": {
+									"name": "data_vacinacao",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "local_vacinacao",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "local_vacinacao",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "dl_parquet_generic",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_azuresql_generic",
+						"type": "DatasetReference",
+						"parameters": {
+							"schemaName": "SalesLT",
+							"tableName": "tb_vacinados_trusted"
+						}
+					}
+				]
+			},
+			{
+				"name": "DF_FILTER_CPF_NULL",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "CD_API_TO_RAW",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.01:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "RAW_TO_TRUSTED_FILTERED_CPF_NULL",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sourceRaw": {
+								"containerName": "raw",
+								"fileName": "setVacinados.csv"
 							}
 						}
 					},
