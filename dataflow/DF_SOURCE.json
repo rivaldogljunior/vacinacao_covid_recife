@@ -12,21 +12,10 @@
 					"name": "sourceApi"
 				}
 			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "dl_parquet_generic",
-						"type": "DatasetReference"
-					},
-					"name": "sinkToTrusted"
-				}
-			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "filterCpfNull"
-				},
-				{
-					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -34,24 +23,7 @@
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> sourceApi",
-				"sourceApi filter(cpf!='null' && dose <= 3) ~> filterCpfNull",
-				"filterCpfNull aggregate(groupBy(cpf,",
-				"          nome,",
-				"          dose),",
-				"     sexo = last(sexo),",
-				"          grupo = last(grupo),",
-				"          vacina = last(vacina)) ~> aggregate1",
-				"aggregate1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     format: 'parquet',",
-				"     partitionFileNames:['setVacinadosTrusted.parquet'],",
-				"     umask: 0022,",
-				"     preCommands: [],",
-				"     postCommands: [],",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     saveOrder: 1,",
-				"     partitionBy('hash', 1)) ~> sinkToTrusted"
+				"sourceApi filter(cpf!='null') ~> filterCpfNull"
 			]
 		}
 	}
