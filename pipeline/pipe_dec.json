@@ -205,7 +205,7 @@
 						}
 					},
 					"compute": {
-						"coreCount": 8,
+						"coreCount": 16,
 						"computeType": "General"
 					},
 					"traceLevel": "Fine"
