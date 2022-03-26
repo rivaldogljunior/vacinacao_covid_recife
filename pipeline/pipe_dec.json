@@ -94,54 +94,6 @@
 									"type": "String",
 									"physicalType": "String"
 								}
-							},
-							{
-								"source": {
-									"name": "first_data_vacinacao",
-									"type": "DateTime",
-									"physicalType": "DATE"
-								},
-								"sink": {
-									"name": "first_data_vacinacao",
-									"type": "DateTime",
-									"physicalType": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "last_data_vacinacao",
-									"type": "DateTime",
-									"physicalType": "DATE"
-								},
-								"sink": {
-									"name": "last_data_vacinacao",
-									"type": "DateTime",
-									"physicalType": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "first_local_vacinacao",
-									"type": "String",
-									"physicalType": "UTF8"
-								},
-								"sink": {
-									"name": "first_local_vacinacao",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "last_local_vacinacao",
-									"type": "String",
-									"physicalType": "UTF8"
-								},
-								"sink": {
-									"name": "last_local_vacinacao",
-									"type": "String",
-									"physicalType": "String"
-								}
 							}
 						],
 						"typeConversion": true,
