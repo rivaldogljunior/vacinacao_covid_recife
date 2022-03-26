@@ -2,7 +2,7 @@
 	"name": "ds_azuresql_generic",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_sqldb",
+			"referenceName": "ls_dbsql",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -17,14 +17,8 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": {
-				"value": "@dataset().schemaName",
-				"type": "Expression"
-			},
-			"table": {
-				"value": "@dataset().tableName",
-				"type": "Expression"
-			}
+			"schema": "SalesLT",
+			"table": "tb_vacinados_trusted"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

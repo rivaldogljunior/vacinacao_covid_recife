@@ -1,5 +1,5 @@
 {
-	"name": "DF_SOURCE",
+	"name": "RAW_TO_TRUSTED_FILTERED_CPF_NULL",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -9,22 +9,19 @@
 						"referenceName": "ds_csv_generic",
 						"type": "DatasetReference"
 					},
-					"name": "sourceApi"
+					"name": "sourceRaw"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_csv_generic",
+						"referenceName": "dl_parquet_generic",
 						"type": "DatasetReference"
 					},
-					"name": "sinkToTrusted"
+					"name": "sinkTrusted"
 				}
 			],
 			"transformations": [
-				{
-					"name": "aggregateCpf"
-				},
 				{
 					"name": "filterCpfNull"
 				}
@@ -44,27 +41,19 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false) ~> sourceApi",
-				"sourceApi aggregate(groupBy(cpf,",
-				"          nome),",
-				"     dose = count(cpf),",
-				"          sexo = first(sexo),",
-				"          grupo = first(grupo),",
-				"          first_data_vacinacao = first(data_vacinacao),",
-				"          last_data_vacinacao = last(data_vacinacao),",
-				"          first_local_vacinacao = first(local_vacinacao),",
-				"          last_local_vacinacao = last(local_vacinacao)) ~> aggregateCpf",
-				"aggregateCpf filter(cpf!='null') ~> filterCpfNull",
+				"     ignoreNoFilesFound: false) ~> sourceRaw",
+				"sourceRaw filter(cpf!='null') ~> filterCpfNull",
 				"filterCpfNull sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['setVacinados.csv'],",
+				"     format: 'parquet',",
+				"     partitionFileNames:['setVacinados.parquet'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1,",
-				"     partitionBy('hash', 1)) ~> sinkToTrusted"
+				"     partitionBy('hash', 1)) ~> sinkTrusted"
 			]
 		}
 	}

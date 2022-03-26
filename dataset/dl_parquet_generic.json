@@ -1,0 +1,20 @@
+{
+	"name": "dl_parquet_generic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_lake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "part-merged.snappy.parquet",
+				"fileSystem": "trusted"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
