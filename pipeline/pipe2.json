@@ -1,0 +1,38 @@
+{
+	"name": "pipe2",
+	"properties": {
+		"activities": [
+			{
+				"name": "COPY_TRUSTED_TO_DB",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "TRSUSTED_TO_BD",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sinkDb": {
+								"schemaName": "Vacina",
+								"tableName": "tb_vacinados_trusted"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
