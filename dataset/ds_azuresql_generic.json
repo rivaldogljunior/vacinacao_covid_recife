@@ -17,8 +17,8 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "SalesLT",
-			"table": "tb_trusted_vacinados"
+			"schema": "Vacina",
+			"table": "tb_vacinados_trusted"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
