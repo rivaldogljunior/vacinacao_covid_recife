@@ -1,0 +1,26 @@
+{
+	"name": "TRSUSTED_TO_BD",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "dl_parquet_generic",
+						"type": "DatasetReference"
+					},
+					"name": "sourceTrusted"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> sourceTrusted"
+			]
+		}
+	}
+}
