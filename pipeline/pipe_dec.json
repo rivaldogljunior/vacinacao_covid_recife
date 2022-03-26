@@ -175,11 +175,11 @@
 				]
 			},
 			{
-				"name": "COPY_TRUSTED_TO_DB",
+				"name": "DF_TRUSTED_TO_REFINED",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Copy data1",
+						"activity": "CP_TRUSTED_TO_DB",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -195,12 +195,20 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "TRSUSTED_TO_BD",
+						"referenceName": "DF_TRUSTED_TO_REFINED",
 						"type": "DataFlowReference",
 						"datasetParameters": {
-							"sinkDb": {
-								"schemaName": "Vacina",
+							"sourceTrusted": {
+								"schemaName": "SalesLT",
 								"tableName": "tb_vacinados_trusted"
+							}
+						},
+						"linkedServiceParameters": {
+							"sourceTrusted": {
+								"schemaLinkedService": {
+									"schemaName": "SalesLT",
+									"tableName": "tb_vacinados_trusted"
+								}
 							}
 						}
 					},
@@ -212,7 +220,7 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "CP_TRUSTED_TO_DB",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -404,7 +412,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "RAW_TO_TRUSTED_FILTERED_CPF_NULL",
+						"referenceName": "DF_FILTER_CPF_NULL",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"sourceRaw": {

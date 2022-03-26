@@ -1,5 +1,5 @@
 {
-	"name": "RAW_TO_TRUSTED_FILTERED_CPF_NULL",
+	"name": "DF_FILTER_CPF_NULL",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {

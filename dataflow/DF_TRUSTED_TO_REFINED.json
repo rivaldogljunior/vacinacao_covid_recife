@@ -1,65 +1,35 @@
 {
-	"name": "TRSUSTED_TO_BD",
+	"name": "DF_TRUSTED_TO_REFINED",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "dl_parquet_generic",
+						"referenceName": "ds_azuresql_generic",
 						"type": "DatasetReference"
 					},
 					"name": "sourceTrusted"
 				}
 			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "ds_azuresql_generic",
-						"type": "DatasetReference"
-					},
-					"name": "sinkDb"
-				}
-			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "aggregateCpfNome"
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          cpf as string,",
-				"          nome as string,",
-				"          sexo as string,",
-				"          grupo as string,",
-				"          vacina as string,",
-				"          lote as string,",
-				"          dose as short,",
-				"          data_vacinacao as date,",
-				"          local_vacinacao as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> sourceTrusted",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourceTrusted",
 				"sourceTrusted aggregate(groupBy(cpf,",
 				"          nome),",
 				"     sexo = last(sexo),",
 				"          grupo = last(grupo),",
 				"          doses = max(dose),",
-				"          last_data_vacinacao = max(data_vacinacao)) ~> aggregateCpfNome",
-				"aggregateCpfNome sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     recreate:true,",
-				"     format: 'table',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sinkDb"
+				"          last_data_vacinacao = max(data_vacinacao)) ~> aggregateCpfNome"
 			]
 		}
 	}
