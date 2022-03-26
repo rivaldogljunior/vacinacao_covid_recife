@@ -42,7 +42,9 @@
 				"          nome,",
 				"          dose,",
 				"          data_vacinacao),",
-				"     each(match(true()), $$ = last($$))) ~> aggregateDistinctRows"
+				"     sexo = last(sexo),",
+				"          grupo = last(grupo),",
+				"          doses = count(dose)) ~> aggregateDistinctRows"
 			]
 		}
 	}
