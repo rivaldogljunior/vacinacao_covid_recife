@@ -21,7 +21,6 @@
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> sourceApi",
 				"sourceApi filter(cpf!='null') ~> filterCpfNull"
 			]
