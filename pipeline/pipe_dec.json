@@ -229,8 +229,16 @@
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"sinkDb": {
-								"schemaName": "SalesLT",
-								"tableName": "tb_trusted_vacinados"
+								"schemaName": "Vacina",
+								"tableName": "tb_vacinados_trusted"
+							}
+						},
+						"linkedServiceParameters": {
+							"sinkDb": {
+								"schemaLinkedService": {
+									"schemaName": "Vacina",
+									"tableName": "tb_vacinados_trusted"
+								}
 							}
 						}
 					},
