@@ -39,9 +39,7 @@
 				"     ignoreNoFilesFound: false) ~> sourceApi",
 				"sourceApi filter(cpf!='null') ~> filterCpfNull",
 				"filterCpfNull aggregate(groupBy(cpf,",
-				"          nome,",
-				"          dose,",
-				"          data_vacinacao),",
+				"          nome),",
 				"     sexo = last(sexo),",
 				"          grupo = last(grupo),",
 				"          doses = count(dose)) ~> aggregateDistinctRows"
