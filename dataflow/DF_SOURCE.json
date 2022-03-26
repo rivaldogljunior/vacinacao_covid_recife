@@ -42,7 +42,8 @@
 				"          nome),",
 				"     sexo = last(sexo),",
 				"          grupo = last(grupo),",
-				"          doses = count(dose)) ~> aggregateDistinctRows"
+				"          doses = count(dose),",
+				"          last_vacinacao = last(data_vacinacao)) ~> aggregateDistinctRows"
 			]
 		}
 	}
