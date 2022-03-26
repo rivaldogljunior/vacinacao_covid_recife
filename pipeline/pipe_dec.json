@@ -173,6 +173,43 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "COPY_RAW_TO_TRUSTED",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "COPY_API_TO_RAW",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_SOURCE",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sourceApi": {
+								"containerName": "raw",
+								"fileName": "setVacinados.csv"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"annotations": []
