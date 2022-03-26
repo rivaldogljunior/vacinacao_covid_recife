@@ -16,6 +16,9 @@
 			"transformations": [
 				{
 					"name": "filterCpfNull"
+				},
+				{
+					"name": "aggregateCpfNomeDose"
 				}
 			],
 			"scriptLines": [
@@ -34,7 +37,13 @@
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: false) ~> sourceApi",
-				"sourceApi filter(cpf!='null') ~> filterCpfNull"
+				"sourceApi filter(cpf!='null') ~> filterCpfNull",
+				"filterCpfNull aggregate(groupBy(cpf,",
+				"          nome,",
+				"          dose),",
+				"     sexo = last(sexo),",
+				"          grupo = last(grupo),",
+				"          dose = count(dose)) ~> aggregateCpfNomeDose"
 			]
 		}
 	}
