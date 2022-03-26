@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "DF_SOURCE",
+						"activity": "COPY_RAW_TO_TRUSTED",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -128,7 +128,7 @@
 				]
 			},
 			{
-				"name": "DF_SOURCE",
+				"name": "COPY_RAW_TO_TRUSTED",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -139,7 +139,7 @@
 					}
 				],
 				"policy": {
-					"timeout": "1.00:00:00",
+					"timeout": "0.02:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
