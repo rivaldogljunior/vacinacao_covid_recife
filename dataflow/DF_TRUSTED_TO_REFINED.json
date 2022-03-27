@@ -1,12 +1,12 @@
 {
-	"name": "TRSUSTED_TO_BD",
+	"name": "DF_TRUSTED_TO_REFINED",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "dl_parquet_generic",
+						"referenceName": "ds_azuresql_generic",
 						"type": "DatasetReference"
 					},
 					"name": "sourceTrusted"
@@ -15,15 +15,15 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_azuresql_generic",
+						"referenceName": "ds_csv_generic",
 						"type": "DatasetReference"
 					},
-					"name": "sinkDb"
+					"name": "sinkRefined"
 				}
 			],
 			"transformations": [
 				{
-					"name": "aggregateCpfNome"
+					"name": "aggregateNome"
 				}
 			],
 			"scriptLines": [
@@ -41,25 +41,21 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     inferDriftedColumnTypes: true,",
-				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> sourceTrusted",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourceTrusted",
 				"sourceTrusted aggregate(groupBy(cpf,",
 				"          nome),",
 				"     sexo = last(sexo),",
 				"          grupo = last(grupo),",
 				"          doses = max(dose),",
-				"          last_data_vacinacao = max(data_vacinacao)) ~> aggregateCpfNome",
-				"aggregateCpfNome sink(allowSchemaDrift: true,",
+				"          ultima_vacinacao = max(data_vacinacao)) ~> aggregateNome",
+				"aggregateNome sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     recreate:true,",
-				"     format: 'table',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sinkDb"
+				"     skipDuplicateMapOutputs: true) ~> sinkRefined"
 			]
 		}
 	}
